@@ -13,7 +13,7 @@ const port = 3000
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors())
+app.use(cors({origin:"https://to-do-one-nu.vercel.app/"}))
 
 
 //dbconnection

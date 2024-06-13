@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "666afa5f4e5a6ea95dd67fd3"
+  },
+  "username": "darthman",
+  "email": "darthman@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666afb891e4841224438a6a9"
+  },
+  "username": "mama",
+  "email": "mama@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666afbfc52df933222c8aa13"
+  },
+  "username": "soma",
+  "email": "soma@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666afc3000250f550ad4c369"
+  },
+  "username": "foo",
+  "email": "foo@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666afce31740b33e1e1002fe"
+  },
+  "username": "bar",
+  "email": "bar@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666afcf51740b33e1e100301"
+  },
+  "username": "baz",
+  "email": "baz@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666afd071740b33e1e100304"
+  },
+  "username": "sunita",
+  "email": "sunita@gmail.com",
+  "password": "darthman05",
+  "__v": 0
+}]

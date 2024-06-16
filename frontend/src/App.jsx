@@ -1,11 +1,12 @@
-import RegisterUser from "./RegisterUser"
-
+import AddTask from "./AddTask"
+import GetTask from "./GetTask"
 function App() {
   
 
   return (
     <>
-      <RegisterUser/>
+      <AddTask/>
+      <GetTask/>
     </>
   )
 }

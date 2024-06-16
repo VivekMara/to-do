@@ -1,58 +1,79 @@
 import express from "express"
+import mongoose from "mongoose"
 import 'dotenv/config'
 import cors from "cors"
-import dbConnect from "./db/index.db.js";
-import { User } from "./models/user.model.js";
-import bcrypt from "bcrypt"
+import { Task } from "./models/task.model.js";
 
 
-//Specs
+
+//specs
 const app = express();
-const port = 3000
+const port = process.env.PORT || 5000
 
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({origin:"https://to-do-one-nu.vercel.app/"}))
+app.use(cors())
 
 
 //dbconnection
+const dbConnect = async () => {
+    try {
+        const connection = await mongoose.connect(`${process.env.MONGODB_URI}/task-manager`);
+        console.log("DB Connected!!")
+    } catch (error) {
+        console.error(error)
+    }
+    
+}
 dbConnect();
 
 
 //routes
 
-//user-registeration routes
-app.post("/register", async (req,res) => {
-    const {username,email,password} = req.body;
+app.post("/api/addtask", async (req,res) => {
+    const {username,task} = req.body;
     try {
-        const registeredUser = await User.findOne({username});
-        if (!registeredUser) {
-            const registerUser = await User.create({username,email,password});
-            console.log(registerUser);
-            res.status(200).json(
-                {
-                    message:"User successfully created!!"
-                }
-            )
-        }
-        else{
-            res.status(404).json(
-                {
-                    message:"User already exists!!"
-                }
-            )
-        }
+        const addTask = await Task.create({username,task});
+        res.status(200).json(
+            {
+                message:"Task added successfully",
+                name:username,
+                task:task
+            }
+        )
         
     } catch (error) {
         res.status(500).json(
             {
-                message:"Error creating the user!!"
+                message:"Error adding task!!",
+                error
             }
         )
     }
 })
 
+app.post("/api/gettasks", async (req,res) => {
+    const {username} = req.body;
+    try {
+        const registeredUser = await Task.find({username});
+        if (registeredUser == "") {
+            res.status(404).json({
+                message:"User does not exist!!"
+            })
+        } else {
+            res.status(200).json(registeredUser)
+        }
+        
+    } catch (error) {
+        res.status(500).json(
+            {
+                message:"Error finding task!!",
+                error: error
+            }
+        )
+    }
+})
 
 
 
@@ -70,6 +91,6 @@ try {
 
 
 
-export default app
+
 
 

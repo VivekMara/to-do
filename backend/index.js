@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import 'dotenv/config'
 import cors from "cors"
 import { Task } from "./models/task.model.js";
+import path from "express"
 
 
 
@@ -14,6 +15,7 @@ const port = process.env.PORT || 5000
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors())
+
 
 
 //dbconnection
@@ -30,6 +32,10 @@ dbConnect();
 
 
 //routes
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  });
 
 app.post("/api/addtask", async (req,res) => {
     const {username,task} = req.body;

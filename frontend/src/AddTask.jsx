@@ -29,14 +29,14 @@ export default function AddTask(){
             <label htmlFor="username">Name:</label>
             <input type="text" name="username" id="username" value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required className="border-2 rounded-xl text-black p-2 "/>
+            required className="border-2 rounded-xl text-black p-2 " autocomplete="off"/>
             </div>
             <br />
             <div>
             <label htmlFor="task">Task:</label>
             <input type="text" name="task" id="task" value={task}
             onChange={(e) => setTask(e.target.value)}
-            required className="border-2 rounded-xl text-black p-2 "/>
+            required className="border-2 rounded-xl text-black p-2 " autocomplete="off"/>
             </div>
             <br />
             <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Add Task</button>

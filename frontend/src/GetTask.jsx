@@ -40,7 +40,7 @@ export default function GetTask(){
         <form onSubmit={gettasks} className="flex flex-col items-center">
             <div className="">
                 <label htmlFor="username">Name:</label>
-                <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required className="border-2 rounded-xl text-black p-2 " />
+                <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required className="border-2 rounded-xl text-black p-2 " autocomplete="off" />
             </div>
             <br />
             <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Submit</button>

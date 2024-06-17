@@ -21,7 +21,7 @@ app.use(cors())
 //dbconnection
 const dbConnect = async () => {
     try {
-        const connection = await mongoose.connect(`mongodb+srv://darthman:sOMSq2yQB61dZevE@mycluster.z6qywql.mongodb.net//task-manager`);
+        const connection = await mongoose.connect(`mongodb+srv://darthman:sOMSq2yQB61dZevE@mycluster.z6qywql.mongodb.net/task-manager`);
         console.log("DB Connected!!")
     } catch (error) {
         console.error(error)

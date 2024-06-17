@@ -58,20 +58,15 @@ app.post("/api/gettasks", async (req,res) => {
     try {
         const registeredUser = await Task.find({username});
         if (registeredUser == "") {
-            res.status(404).json({
-                message:"User does not exist!!"
-            })
+            res.status(404).send(
+        "User does not exist!!"
+            )
         } else {
             res.status(200).json(registeredUser)
         }
         
     } catch (error) {
-        res.status(500).json(
-            {
-                message:"Error finding task!!",
-                error: error
-            }
-        )
+        res.status(500).send("Error finding the task!!")
     }
 })
 

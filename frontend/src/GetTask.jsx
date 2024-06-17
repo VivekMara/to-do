@@ -8,28 +8,29 @@ export default function GetTask(){
 
     const [username,setUsername] = useState("");
     const [task,setTask] = useState(null);
-    const [taskcount,setTaskcount] = useState(0);
+    const [taskcount,setTaskcount] = useState(null);
     const [status,setStatus] = useState(null)
     const gettasks = async(e) => {
         e.preventDefault();
         try {
             const response = await axios.post("/api/gettasks", {username});
-            const status = response.status
-            if (status === 200) {
-                const data = response.data
+            const status = response.statusText
+            const data = response.data
+            if (response.status === 200) {
                 const tasks = data.map(obj =>  <li key={obj._id}>{obj.task}</li>)
                 const number_tasks = tasks.length
                 setUsername("")
                 setTask(tasks)
                 setTaskcount(number_tasks)
                 setStatus(status)
-            } else {
-                setTask(response.data.message);
-                setStatus(status)
-            }
-            console.log(response)
+            } 
+            
         } catch (error) {
-            console.error(error)
+            setUsername("")
+            setTask(null)
+            setTaskcount(0)
+            setStatus(error.response.data)
+            console.log(error.response.data)
         }
     }
     
@@ -56,7 +57,7 @@ export default function GetTask(){
         </div>
         <br />
         <div className="flex gap-3 justify-center">
-            <h1>Status Code:</h1>
+            <h1>Status:</h1>
             <h1>{status}</h1>
         </div>
         </div>

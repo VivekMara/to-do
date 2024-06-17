@@ -35,14 +35,31 @@ export default function GetTask(){
     
     return(
         <>
-        <form onSubmit={gettasks}>
-            <label htmlFor="username">Name:</label>
-            <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <button type="submit" >Submit</button>
+        <div className="border-2 rounded-xl p-3 flex flex-col w-1/2 h-fit">
+        <form onSubmit={gettasks} className="flex flex-col items-center">
+            <div className="">
+                <label htmlFor="username">Name:</label>
+                <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required className="border-2 rounded-xl text-black p-2 " />
+            </div>
+            <br />
+            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Submit</button>
         </form>
-        <ul>{task}</ul>
-        <h1>{taskcount}</h1>
-        <h1>{status}</h1>
+        <br />
+        <div className="flex gap-3 justify-center">
+            <h1>Tasks:</h1>
+            <ul>{task}</ul>
+        </div>
+        <br />
+        <div className="flex gap-3 justify-center">
+            <h1>Task count:</h1>
+            <h1>{taskcount}</h1>
+        </div>
+        <br />
+        <div className="flex gap-3 justify-center">
+            <h1>Status Code:</h1>
+            <h1>{status}</h1>
+        </div>
+        </div>
         
         </>
     )

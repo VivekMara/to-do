@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {Link} from "react-router-dom"
+
 
 
 export default function AddTask(){
@@ -20,18 +20,26 @@ export default function AddTask(){
         }
     }
 
+    
+
     return(
-        <>
-        <form onSubmit={addTask}>
+        <div className="border-2 rounded-xl p-3 flex flex-col w-1/2 h-fit ">
+        <form onSubmit={addTask} className="flex flex-col items-center ">
+            <div>
             <label htmlFor="username">Name:</label>
             <input type="text" name="username" id="username" value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required/>
+            required className="border-2 rounded-xl text-black p-2 "/>
+            </div>
+            <br />
+            <div>
             <label htmlFor="task">Task:</label>
             <input type="text" name="task" id="task" value={task}
             onChange={(e) => setTask(e.target.value)}
-            required/>
-            <button type="submit">Add Task</button>
+            required className="border-2 rounded-xl text-black p-2 "/>
+            </div>
+            <br />
+            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Add Task</button>
         </form>
         {json && (
         <div>
@@ -40,7 +48,6 @@ export default function AddTask(){
         <h2>Task:{json.task}</h2>
         </div>
         )}
-        
-        </>
+        </div>
     )
 }

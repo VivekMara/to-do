@@ -1,12 +1,16 @@
 import AddTask from "./AddTask"
 import GetTask from "./GetTask"
+import Navbar from "./Navbar"
 function App() {
   
 
   return (
     <>
-      <AddTask/>
-      <GetTask/>
+      <Navbar/>
+      <div className="flex border-2 rounded-xl p-3">
+        <AddTask/>
+        <GetTask/>
+      </div>
     </>
   )
 }

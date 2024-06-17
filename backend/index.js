@@ -3,13 +3,13 @@ import mongoose from "mongoose"
 import 'dotenv/config'
 import cors from "cors"
 import { Task } from "./models/task.model.js";
-import path from "express"
+
 
 
 
 //specs
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 //middlewares
 app.use(express.json());
@@ -21,7 +21,7 @@ app.use(cors())
 //dbconnection
 const dbConnect = async () => {
     try {
-        const connection = await mongoose.connect(`mongodb+srv://darthman:sOMSq2yQB61dZevE@mycluster.z6qywql.mongodb.net/task-manager`);
+        const connection = await mongoose.connect(`${process.env.MONGODB_URI}/task-manager`);
         console.log("DB Connected!!")
     } catch (error) {
         console.error(error)

@@ -1,26 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import AddTask from './AddTask.jsx'
+import Home from './Home.jsx'
+
 import { createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
 import './index.css'
-import GetTask from './GetTask.jsx'
+import App from './App.jsx'
+
 
 const router = createBrowserRouter(
   [
     {
       path:"/",
-      element:<div>Hello World</div>
+      element:<Home/>
     },
     {
-      path:"addtask",
-      element:<AddTask/>
-    },
-    {
-      path:"gettask",
-      element:<GetTask/>
+      path:"tasks",
+      element:<App/>
     }
+    
   ]
 )
 

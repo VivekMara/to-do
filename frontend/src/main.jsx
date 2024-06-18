@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './Home.jsx'
-
 import { createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
 import './index.css'
-import App from './App.jsx'
+
+import AddTask from './AddTask.jsx'
+import GetTask from './GetTask.jsx'
 
 
 const router = createBrowserRouter(
@@ -15,8 +16,12 @@ const router = createBrowserRouter(
       element:<Home/>
     },
     {
-      path:"tasks",
-      element:<App/>
+      path:"/gettasks",
+      element:<GetTask/>
+    },
+    {
+      path:"/addtask",
+      element:<AddTask/>
     }
     
   ]

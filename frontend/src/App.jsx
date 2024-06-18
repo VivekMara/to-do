@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <div className="flex border-2 rounded-xl p-3">
+      <div className="flex border-2 rounded-xl p-3 gap-3 h-fit">
         <AddTask/>
         <GetTask/>
       </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-
+import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 export default function AddTask(){
     const [username,setUsername] = useState('');
@@ -13,7 +13,7 @@ export default function AddTask(){
         try {
             const response = await axios.post("/api/addtask",{username,task});
             setJson(response.data)
-            setUsername('')
+            
             setTask('')
         } catch (error) {
             console.error(error)
@@ -23,6 +23,8 @@ export default function AddTask(){
     
 
     return(
+        <>
+        <Navbar/>
         <div className="border-2 rounded-xl p-3 flex flex-col w-1/2 h-fit ">
         <form onSubmit={addTask} className="flex flex-col items-center ">
             <div>
@@ -49,5 +51,8 @@ export default function AddTask(){
         </div>
         )}
         </div>
+        <button className="border-2 p-3 rounded-2xl font-semibold text-xl"><Link to={`/gettasks`}>Get tasks</Link></button>
+        </>
+        
     )
 }

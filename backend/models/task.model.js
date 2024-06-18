@@ -9,6 +9,18 @@ const taskSchema = new mongoose.Schema(
         task:{
             type:String,
             required:true
+        },
+        complete:{
+            type:Boolean,
+            default:false
+        },
+        pending:{
+            type:Boolean,
+            default:false
+        },
+        skip:{
+            type:Boolean,
+            default:false
         }
     },{timestamps:true}
 )

@@ -6,7 +6,10 @@ export default function Home(){
         <Navbar/>
         <div className="flex items-center justify-center flex-col w-full h-screen gap-4">
             <h1 className="text-8xl font-black ">Get Started</h1>
-            <button className="border-2 p-3 rounded-2xl font-semibold text-xl"><Link to={`tasks`}>Click me!!</Link></button>
+            <div className="flex gap-3">
+            <button className="border-2 p-3 rounded-2xl font-semibold text-xl"><Link to={`/addtask`}>Add tasks</Link></button>
+            <button className="border-2 p-3 rounded-2xl font-semibold text-xl"><Link to={`/gettasks`}>Get tasks</Link></button>
+            </div>
         </div>
         </>
     )

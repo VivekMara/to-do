@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import 'dotenv/config'
 import cors from "cors"
 import { Task } from "./models/task.model.js";
-
+import bodyparser from "body-parser"
 
 
 
@@ -15,7 +15,7 @@ const port = process.env.PORT || 5000
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors())
-
+app.use(bodyparser.json())
 
 
 //dbconnection
@@ -34,7 +34,7 @@ dbConnect();
 //routes
 
 
-
+//to add task
 app.post("/api/addtask", async (req,res) => {
     const {username,task} = req.body;
     try {
@@ -57,20 +57,79 @@ app.post("/api/addtask", async (req,res) => {
     }
 })
 
+
+//to query tasks
 app.post("/api/gettasks", async (req,res) => {
     const {username} = req.body;
     try {
         const registeredUser = await Task.find({username});
         if (registeredUser == "") {
-            res.status(404).send(
-        "User does not exist!!"
-            )
+            res.status(404).send(`${username} user does not exist!!`)
+            
         } else {
             res.status(200).json(registeredUser)
         }
         
     } catch (error) {
         res.status(500).send("Error finding the task!!")
+    }
+})
+
+
+//to update a task
+app.put("/api/updatetask", async (req,res) => {
+    const {username,task,complete,pending,skip} = req.body;
+    const existingUser = await Task.findOne({username,task});
+    try {
+        if (existingUser) {
+            const updateBooolean = await Task.updateOne(
+                {task:task, username:username},{complete,pending,skip}
+            );
+            res.status(200).send("1");
+        }
+        else{
+            res.status(404).send(`${username} and ${task} does not exist!!`)
+        }
+    } catch (error) {
+        res.status(404).send(error);
+    }
+
+})
+
+
+
+
+
+//to delete a task
+app.delete("/api/deletetask", async (req,res) => {
+    const {username,task} = req.body;
+    const existingUser = await Task.findOne({username,task});
+    try {
+        if (existingUser) {
+            const deleteTask = await Task.deleteOne({username,task});
+            res.status(200).send(`Task:${task} of username: ${username} has been deleted`);
+        }
+        else{
+            res.status(404).send(`${username} and ${task} does not exist!!`)
+        }
+    } catch (error) {
+        res.status(404).send(error);
+    }
+})
+
+
+
+
+
+
+//to get the total number of unique users
+app.get("/api/users", async (req,res) => {
+    try {
+        const users = 0
+        const response = await Task.estimatedDocumentCount();
+        res.status(200).send(response)
+    } catch (error) {
+        res.status(500).send("Error fetching docs")
     }
 })
 

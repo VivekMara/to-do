@@ -32,8 +32,6 @@ dbConnect();
 
 
 //routes
-
-
 //to add task
 app.post("/api/addtask", async (req,res) => {
     const {username,task} = req.body;
@@ -85,7 +83,9 @@ app.put("/api/updatetask", async (req,res) => {
             const updateBooolean = await Task.updateOne(
                 {task:task, username:username},{complete,pending,skip}
             );
-            res.status(200).send("1");
+            const updatedUser = await Task.findOne({username,task})
+            res.status(200).send(updatedUser);
+            
         }
         else{
             res.status(404).send(`${username} and ${task} does not exist!!`)
@@ -122,16 +122,7 @@ app.delete("/api/deletetask", async (req,res) => {
 
 
 
-//to get the total number of unique users
-app.get("/api/users", async (req,res) => {
-    try {
-        const users = 0
-        const response = await Task.estimatedDocumentCount();
-        res.status(200).send(response)
-    } catch (error) {
-        res.status(500).send("Error fetching docs")
-    }
-})
+
 
 
 

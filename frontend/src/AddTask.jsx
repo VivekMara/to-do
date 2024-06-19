@@ -25,7 +25,7 @@ export default function AddTask(){
     return(
         <>
         <Navbar/>
-        <div className="border-2 rounded-xl p-3 flex flex-col w-1/2 h-fit ">
+        <div className="border-2 rounded-xl p-3 flex flex-col w-screen h-fit ">
         <form onSubmit={addTask} className="flex flex-col items-center ">
             <div>
             <label htmlFor="username">Name:</label>
@@ -43,15 +43,19 @@ export default function AddTask(){
             <br />
             <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Add Task</button>
         </form>
+        <br />
         {json && (
-        <div>
+        <div className="flex flex-col items-center border-2 w-full h-fit rounded-xl p-3">
         <h1>{json.message}</h1>
         <h2>Name:{json.name}</h2>
         <h2>Task:{json.task}</h2>
         </div>
         )}
         </div>
+        <br />
+        <div className="flex justify-center">
         <button className="border-2 p-3 rounded-2xl font-semibold text-xl"><Link to={`/gettasks`}>Get tasks</Link></button>
+        </div>
         </>
         
     )

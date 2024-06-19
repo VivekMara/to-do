@@ -15,7 +15,7 @@ export default function GetTask(){
     const [task,setTask] = useState(null);
     const [taskcount,setTaskcount] = useState(null);
     const [status,setStatus] = useState(null);
-    const [complete,setComplete] = useState("Mark complete")
+    const [complete,setComplete] = useState(false)
 
     
 
@@ -31,12 +31,14 @@ export default function GetTask(){
             const data = response.data
             const completionStatus = data.map(obj => obj.complete)
             if (response.status === 200) {
-                const tasks = data.map(obj => <div key={obj._id} className="flex gap-3">
+                const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">
                     <li>{obj.task}</li>
-                    <button className="border-2 p-3 rounded-2xl" onClick={()=> {completeTask(obj.username,obj.task)}}>{obj.complete ? "Completed!!" : "Mark Complete!!"}</button>
+                    <button className="border-2 p-1 rounded-2xl" onClick={()=> {completeTask(obj.username,obj.task)}} disabled={obj.complete}>{obj.complete ? "Completed!!" : "Mark Complete!!"}</button>
+                    
                 </div>)
-                const total_number_tasks = tasks.length
                 
+                const total_number_tasks = tasks.length
+                setUsername("")
                 setTask(tasks)
                 setTaskcount(total_number_tasks)
                 setStatus(status)
@@ -55,10 +57,26 @@ export default function GetTask(){
     const completeTask = async (username,task) => {
         try {
             const response = await axios.put("/api/updatetask",{username,task,complete:true});
-            window.location.reload()
-            console.log(response.data)
+            const request = await axios.post("/api/gettasks",{username});
+            const status = request.statusText
+            const data = request.data
+            const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">
+                <li>{obj.task}</li>
+                <button className="border-2 p-1 rounded-2xl" onClick={()=> {completeTask(obj.username,obj.task)}} disabled={obj.complete}>{obj.complete ? "Completed!!" : "Mark Complete!!"}</button>
+            </div>)
+            const total_number_tasks = tasks.length
+            setUsername("")
+            setTask(tasks)
+            setTaskcount(total_number_tasks)
+            setStatus(status)
+            console.log(data)
+            
         } catch (error) {
-            console.error(error.response.data)
+            setUsername("")
+            setTask(null)
+            setTaskcount(0)
+            setStatus(error.response.data)
+            console.log(error.response.data)
         }
     }
 
@@ -75,11 +93,11 @@ export default function GetTask(){
                 <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required className="border-2 rounded-xl text-black p-2 " autoComplete="off" />
             </div>
             <br />
-            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Submit</button>
+            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit" >Submit</button>
         </form>
         <br />
         <div className="flex flex-col border-2 rounded-xl p-3">
-        <div className="flex gap-3 justify-center">
+        <div className="flex gap-3 justify-center flex-col items-center">
             <h1>Tasks:</h1>
             <ol>{task}</ol>
         </div>

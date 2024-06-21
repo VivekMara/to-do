@@ -82,7 +82,7 @@ export default function GetTask(){
 
     const deleteTask = async (username,task) => {
         try {
-            const response = await axios.post("http://localhost:3000/api/deletetask",{username,task});  
+            const response = await axios.post("/api/deletetask",{username,task});  
             const request = await axios.post("/api/gettasks",{username});
             const status = request.statusText
             const data = request.data

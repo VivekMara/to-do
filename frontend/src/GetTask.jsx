@@ -25,7 +25,7 @@ export default function GetTask(){
     const gettasks = async(e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("/api/gettasks", {username});
+            const response = await axios.post("https://to-do-backend-0yub.onrender.com/api/gettasks", {username});
             const status = response.statusText
             const data = response.data
             const completionStatus = data.map(obj => obj.complete)
@@ -55,8 +55,8 @@ export default function GetTask(){
 
     const completeTask = async (username,task) => {
         try {
-            const response = await axios.put("/api/updatetask",{username,task,complete:true});
-            const request = await axios.post("/api/gettasks",{username});
+            const response = await axios.put("https://to-do-backend-0yub.onrender.com/api/updatetask",{username,task,complete:true});
+            const request = await axios.post("https://to-do-backend-0yub.onrender.com/api/gettasks",{username});
             const status = request.statusText
             const data = request.data
             const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">
@@ -82,8 +82,8 @@ export default function GetTask(){
 
     const deleteTask = async (username,task) => {
         try {
-            const response = await axios.post("/api/deletetask",{username,task});  
-            const request = await axios.post("/api/gettasks",{username});
+            const response = await axios.post("https://to-do-backend-0yub.onrender.com/api/deletetask",{username,task});  
+            const request = await axios.post("https://to-do-backend-0yub.onrender.com/api/gettasks",{username});
             const status = request.statusText
             const data = request.data
             const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">

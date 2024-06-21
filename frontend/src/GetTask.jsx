@@ -15,8 +15,7 @@ export default function GetTask(){
     const [task,setTask] = useState(null);
     const [taskcount,setTaskcount] = useState(null);
     const [status,setStatus] = useState(null);
-    const [complete,setComplete] = useState(false)
-
+    
     
 
     
@@ -33,8 +32,8 @@ export default function GetTask(){
             if (response.status === 200) {
                 const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">
                     <li>{obj.task}</li>
-                    <button className="border-2 p-1 rounded-2xl" onClick={()=> {completeTask(obj.username,obj.task)}} disabled={obj.complete}>{obj.complete ? "Completed!!" : "Mark Complete!!"}</button>
-                    
+                    {obj.complete ? <button className="border-2 p-1 rounded-2xl bg-green-600">Completed</button> : <button className="border-2 p-1 rounded-2xl bg-orange-600" onClick={()=> {completeTask(obj.username,obj.task)}}>Mark Complete!!</button> }
+                    {obj.complete ? <button onClick={() => {deleteTask(obj.username,obj.task)}} className="border-2 p-1 rounded-2xl bg-red-500">Delete</button> : null}
                 </div>)
                 
                 const total_number_tasks = tasks.length
@@ -62,7 +61,8 @@ export default function GetTask(){
             const data = request.data
             const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">
                 <li>{obj.task}</li>
-                <button className="border-2 p-1 rounded-2xl" onClick={()=> {completeTask(obj.username,obj.task)}} disabled={obj.complete}>{obj.complete ? "Completed!!" : "Mark Complete!!"}</button>
+                {obj.complete ? <button className="border-2 p-1 rounded-2xl bg-green-600">Completed</button> : <button className="border-2 p-1 rounded-2xl bg-orange-600" onClick={()=> {completeTask(obj.username,obj.task)}}>Mark Complete!!</button> }
+                {obj.complete ? <button onClick={() => {deleteTask(obj.username,obj.task)}} className="border-2 p-1 rounded-2xl bg-red-500">Delete</button> : null}
             </div>)
             const total_number_tasks = tasks.length
             setUsername("")
@@ -80,7 +80,32 @@ export default function GetTask(){
         }
     }
 
-    
+    const deleteTask = async (username,task) => {
+        try {
+            const response = await axios.post("http://localhost:3000/api/deletetask",{username,task});  
+            const request = await axios.post("/api/gettasks",{username});
+            const status = request.statusText
+            const data = request.data
+            const tasks = data.map(obj => <div key={obj._id} className="flex gap-3 p-3">
+                <li>{obj.task}</li>
+                {obj.complete ? <button className="border-2 p-1 rounded-2xl bg-green-600">Completed</button> : <button className="border-2 p-1 rounded-2xl bg-orange-600" onClick={()=> {completeTask(obj.username,obj.task)}}>Mark Complete!!</button> }
+                {obj.complete ? <button onClick={() => {deleteTask(obj.username,obj.task)}} className="border-2 p-1 rounded-2xl bg-red-500">Delete</button> : null}
+            </div>)
+            const total_number_tasks = tasks.length
+            setUsername("")
+            setTask(tasks)
+            setTaskcount(total_number_tasks)
+            setStatus(status)
+            console.log(data)
+
+        } catch (error) {
+            setUsername("")
+            setTask(null)
+            setTaskcount(0)
+            setStatus(error.response.data)
+            console.log(error.response.data)
+        }
+    }
 
     
     return(

@@ -47,8 +47,8 @@ export default function AddTask(){
         {json && (
         <div className="flex flex-col items-center border-2 w-full h-fit rounded-xl p-3">
         <h1>{json.message}</h1>
-        <h2>Name:{json.name}</h2>
-        <h2>Task:{json.task}</h2>
+        <h2>Name:  {json.name}</h2>
+        <h2>Task:  {json.task}</h2>
         </div>
         )}
         </div>

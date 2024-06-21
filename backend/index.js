@@ -55,14 +55,13 @@ app.post("/api/addtask", async (req,res) => {
     }
 })
 
-
 //to query tasks
 app.post("/api/gettasks", async (req,res) => {
     const {username} = req.body;
     try {
         const registeredUser = await Task.find({username});
         if (registeredUser == "") {
-            res.status(404).send(`${username} user does not exist!!`)
+            res.status(404).send(`${username} user has no tasks!!`)
             
         } else {
             res.status(200).json(registeredUser)
@@ -72,7 +71,6 @@ app.post("/api/gettasks", async (req,res) => {
         res.status(500).send("Error finding the task!!")
     }
 })
-
 
 //to update a task
 app.put("/api/updatetask", async (req,res) => {
@@ -96,12 +94,8 @@ app.put("/api/updatetask", async (req,res) => {
 
 })
 
-
-
-
-
 //to delete a task
-app.delete("/api/deletetask", async (req,res) => {
+app.post("/api/deletetask", async (req,res) => {
     const {username,task} = req.body;
     const existingUser = await Task.findOne({username,task});
     try {

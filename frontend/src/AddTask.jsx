@@ -30,7 +30,7 @@ export default function AddTask(){
             <div>
             <label htmlFor="username">Name:</label>
             <input type="text" name="username" id="username" value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value.toLowerCase())}
             required className="border-2 rounded-xl text-black p-2 " autoComplete="off"/>
             </div>
             <br />

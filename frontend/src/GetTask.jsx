@@ -25,7 +25,7 @@ export default function GetTask(){
     const gettasks = async(e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("https://to-do-backend-0yub.onrender.com/api/gettasks", {username});
+            const response = await axios.post("https://to-do-backend.up.railway.app/api/gettasks", {username});
             const status = response.statusText
             const data = response.data
             const completionStatus = data.map(obj => obj.complete)

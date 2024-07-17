@@ -11,7 +11,7 @@ export default function AddTask(){
     const addTask =  async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("https://to-do-backend-0yub.onrender.com/api/addtask",{username,task});
+            const response = await axios.post("/api/addtask",{username,task});
             setJson(response.data)
             
             setTask('')

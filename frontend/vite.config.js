@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy: {
       '/api':{
-        target: 'https://to-do-darthman.azurewebsites.net/api',
+        target: 'https://to-do-backend-0yub.onrender.com/api',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       }

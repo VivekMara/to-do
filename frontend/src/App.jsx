@@ -1,7 +1,7 @@
 import AddTask from "./AddTask"
 import GetTask from "./GetTask"
 import Navbar from "./Navbar"
-
+import { Analytics } from "@vercel/analytics/react"
 
 
 
@@ -17,6 +17,7 @@ function App() {
         <AddTask/>
         <GetTask/>
       </div>
+      <Analytics/>
     </>
   )
 }

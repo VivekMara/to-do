@@ -15,9 +15,8 @@ export default function GetTask(){
     const [task,setTask] = useState(null);
     const [taskcount,setTaskcount] = useState(null);
     const [status,setStatus] = useState(null);
+    const [getTaskStatus, setGetTaskStatus] = useState(false);
     
-    
-
     
 
 
@@ -35,9 +34,8 @@ export default function GetTask(){
                     {obj.complete ? <button className="border-2 p-1 rounded-2xl bg-green-600 w-fit h-10 hover:scale-105">Completed</button> : <button className="border-2 p-1 rounded-2xl bg-orange-600 w-full h-fit hover:scale-105" onClick={()=> {completeTask(obj.username,obj.task)}}>Mark Complete!!</button> }
                     {obj.complete ? <button onClick={() => {deleteTask(obj.username,obj.task)}} className="border-2 p-1 rounded-2xl bg-red-500 hover:scale-105 w-fit h-fit">Delete</button> : null}
                 </div>)
-                
+                setGetTaskStatus(false)
                 const total_number_tasks = tasks.length
-                setUsername("")
                 setTask(tasks)
                 setTaskcount(total_number_tasks)
                 setStatus(status)
@@ -118,7 +116,9 @@ export default function GetTask(){
                 <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} required className="border-2 rounded-xl text-black p-2 " autoComplete="off" />
             </div>
             <br />
-            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit" >Submit</button>
+            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit" onClick={() => {setGetTaskStatus(true)}} >{
+                getTaskStatus ? 'Getting Tasks' : 'Get Task'
+                }</button>
         </form>
         <br />
         <div className="flex flex-col border-2 rounded-xl p-3">

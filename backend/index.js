@@ -30,6 +30,9 @@ const dbConnect = async () => {
 }
 dbConnect();
 
+app.get('/',(req,res) => {
+    res.send("hello darthman")
+})
 
 //routes
 //to add task

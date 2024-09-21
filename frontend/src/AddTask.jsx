@@ -7,13 +7,15 @@ export default function AddTask(){
     const [username,setUsername] = useState('');
     const [task,setTask] = useState('');
     const [json,setJson] = useState(null);
+    const [status, setStatus] = useState(false);
+
 
     const addTask =  async (e) => {
         e.preventDefault()
         try {
             const response = await axios.post("/api/addtask",{username,task});
+            setStatus(false)
             setJson(response.data)
-            
             setTask('')
         } catch (error) {
             console.error(error)
@@ -41,7 +43,9 @@ export default function AddTask(){
             required className="border-2 rounded-xl text-black p-2 " autoComplete="off"/>
             </div>
             <br />
-            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit">Add Task</button>
+            <button type="submit" className="border-2 p-3 rounded-2xl font-semibold text-xl w-fit h-fit" onClick={() => {setStatus(true)}}>{
+                status ? 'Adding task' : 'Add task'
+                }</button>
         </form>
         <br />
         {json && (

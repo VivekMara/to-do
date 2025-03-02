@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy: {
       '/api':{
-        target: 'https://tododarthman.azurewebsites.net/api',
+        target: 'http://4.186.40.16/api',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       }

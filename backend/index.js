@@ -21,7 +21,7 @@ app.use(bodyparser.json())
 //dbconnection
 const dbConnect = async () => {
     try {
-        const connection = await mongoose.connect(`${process.env.MONGODB_URI}/task-manager`);
+        const connection = await mongoose.connect(`${process.env.db}/to_do`);
         console.log("DB Connected!!")
     } catch (error) {
         console.error(error)

@@ -21,7 +21,7 @@ app.use(bodyparser.json())
 //dbconnection
 const dbConnect = async () => {
     try {
-        const connection = await mongoose.connect(`${process.env.db}/to_do`);
+        const connection = await mongoose.connect(`${process.env.MONGODB_URL}/to_do`);
         console.log("DB Connected!!")
     } catch (error) {
         console.error(error)
@@ -113,12 +113,6 @@ app.post("/api/deletetask", async (req,res) => {
         res.status(404).send(error);
     }
 })
-
-
-
-
-
-
 
 
 
